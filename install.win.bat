@@ -9,8 +9,7 @@ call mvn install
 echo microhazle installed into %1
 cd %mypath%
 echo off
-ECHO type we must install spring lib for microhazel and routing example
-set /p facade_dir=directory to install?
+set facade_dir=%2
 mkdir  %facade_dir%
 cd    %facade_dir%
 echo on
