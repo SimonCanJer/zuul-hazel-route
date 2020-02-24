@@ -1,15 +1,15 @@
 set mypath=%cd%
 echo %mypath%
 echo "installing micro-hazel project > directory "+ %1
-mkdir %1
-cd %1
+mkdir %2
+cd %2
 call git clone https://github.com/SimonCanJer/microhazle.git
 cd microhazle
 call mvn install
-echo microhazle installed into %1
+echo microhazle installed into %2
 cd %mypath%
 echo off
-set facade_dir=%2
+set facade_dir=%1
 mkdir  %facade_dir%
 cd    %facade_dir%
 echo on
