@@ -37,7 +37,7 @@ exec   java -jar  micro-hazel-spring-examples-1.0.4-exec.jar  backend &
 timeout 45
 exec   java -jar  micro-hazel-spring-examples-1.0.4-exec.jar  facade &
 timeout 45
-cd  "$mypath" || return
-cd   target  || return
+cd $mypath
+cd target
 exec java -jar zuul-lb-1.0-SNAPSHOT-exec.jar &
 
