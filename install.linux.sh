@@ -1,13 +1,13 @@
-mypath= "$(pwd)"
-sudo  mkdir -p "$1"
+mypath="$(pwd)"
+sudo   mkdir -p "$1"
 cd    "$1" || return $?
 git    clone https://github.com/SimonCanJer/microhazle.git
 cd     microhazle || return $?
 mvn    install
-echo   "microhazle installed into $1"
+echo   "***********microhazle installed into $1 ***************"
 cd      "$1" || return $?
 
-ECHO type we must install spring lib for microhazel and routing example
+ECHO   "type we must install spring lib for microhazel and routing example"
  if [ ${#2} -eq  0 ]
   then
     read  -r facade_dir
@@ -17,9 +17,9 @@ ECHO type we must install spring lib for microhazel and routing example
 mkdir  -p "$facade_dir"
 cd     "$facade_dir" || return
 
-echo   "**********************************************************************************"
-echo    "***** installing spring library and routed application into %facade_dir%    *****"
-echo    "**********************************************************************************"
+echo   "*******************************************************************************"
+echo    "***** installing spring library and routed application into %facade_dir%    *"
+echo    "******************************************************************************"
 git     clone https://github.com/SimonCanJer/spring-micro-hazel.git
 cd      spring-micro-hazel || return $?
 mvn     install
