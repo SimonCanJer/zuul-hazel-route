@@ -1,20 +1,20 @@
 mypath= "$(pwd)"
-sudo  mkdir "$1"
-cd     "$1" || return $?
-git     clone https://github.com/SimonCanJer/microhazle.git
+sudo  mkdir -p "$1"
+cd    "$1" || return $?
+git    clone https://github.com/SimonCanJer/microhazle.git
 cd     microhazle || return $?
 mvn    install
 echo   "microhazle installed into $1"
 cd      "$1" || return $?
 
 ECHO type we must install spring lib for microhazel and routing example
- if [ ${#2} -eq 0 ]
+ if [ ${#2} -eq  0 ]
   then
     read  -r facade_dir
   else
     facade_dir=$2
   fi
-mkdir "$facade_dir"
+mkdir  -p "$facade_dir"
 cd     "$facade_dir" || return
 
 echo   "**********************************************************************************"
