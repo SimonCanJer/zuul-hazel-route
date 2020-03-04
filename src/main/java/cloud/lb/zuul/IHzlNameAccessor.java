@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URL;
 import java.util.Map;
 
-public interface IHzlNamePopulator{
+public interface IHzlNameAccessor {
    public interface Invalid {
        void invalidate();
    }

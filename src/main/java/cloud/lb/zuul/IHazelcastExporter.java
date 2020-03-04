@@ -4,5 +4,5 @@ import microhazle.building.api.IMounter;
 
 public interface IHazelcastExporter {
     IMounter mounter();
-    IHzlNamePopulator namePopulator();
+    IHzlNameAccessor namePopulator();
 }
