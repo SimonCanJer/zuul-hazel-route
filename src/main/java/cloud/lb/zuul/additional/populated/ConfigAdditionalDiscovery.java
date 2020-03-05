@@ -53,7 +53,7 @@ public class ConfigAdditionalDiscovery {
         }
 
     }
-
+@SuppressWarnings("all")
     @Bean
     NameUpdater nameUpdater() {
         return new NameUpdater();
@@ -173,15 +173,13 @@ public class ConfigAdditionalDiscovery {
      */
     static class HazelcastNamePAccessor implements IHzlNameAccessor {
 
-        private final IMounter mounter;
-        IAServicePopulator populator;
+        //private final IMounter mounter;
+        private final IAServicePopulator populator;
         AtomicLong calls = new AtomicLong(0);
         ReentrantLock lock = new ReentrantLock();
         Map<String, EndPointHolder> mapNames = new HashMap<>();
-        long time = -1;
-
         HazelcastNamePAccessor(IMounter mounter) {
-            this.mounter = mounter;
+           // this.mounter = mounter;
             populator = mounter.endPointPopulator();
 
         }
@@ -235,7 +233,7 @@ public class ConfigAdditionalDiscovery {
                     @Override
                     public void invalidate() {
                         if (hAncor != null)
-                            if (cep != null) {
+                            if (cep[0] != null) {
                                 logger.error("removing from cache complain for not connectable end point\n ", cep[0]);
                                 hAncor.remove(cep[0]);// remove bad CustomEndPoint from holder
                                 populator.complaignInvalid(cep[0]);// complain for invalid end point

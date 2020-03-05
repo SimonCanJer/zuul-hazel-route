@@ -147,7 +147,7 @@ public class DispatchFilter extends ZuulFilter {
                         logger.error("the exposed end point is not connectable \n" + dest.toString() + "\n invalidate and complain");
                         invalidator[0].invalidate();//complain the point is not working
                     } else {
-// any another fatal error
+// any another -fatal error
                         try {
                             RequestContext.getCurrentContext().getResponse().sendError(HttpStatus.SC_SERVICE_UNAVAILABLE, "Exception in router");
                         } catch (IOException e1) {
@@ -162,7 +162,7 @@ public class DispatchFilter extends ZuulFilter {
                 // try next url
                 dest = hazelAccess.namePopulator().forName(name, invalidator);
                 if (dest == null) {
-                    // no another URL available in the list
+                    // no another URL available in the list and is nowhere to route
                     logger.error(" no working instances ready to process for service name " + name);
                     handleNoDest();
                     break;
@@ -183,19 +183,25 @@ public class DispatchFilter extends ZuulFilter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //setResponseStatusCode(HttpStatus.SC_NOT_FOUND);
-        RequestContext.getCurrentContext().setSendZuulResponse(false);
+         RequestContext.getCurrentContext().setSendZuulResponse(false);
     }
 
+    /**
+     * implements routing by means of removing/replacing application name part of path
+     * by element for internal routing
+     * @param name - name of application
+     * @param dest - destination URL (got from hazelcast)
+     * @param ctx - request context
+     * @throws ConnectException
+     */
     private void route(String name, URL dest, RequestContext ctx) throws ConnectException {
         String s = dest.toString();
         StringTokenizer st = new StringTokenizer(ctx.getRequest().getServletPath(), "/");
         StringBuilder sb = new StringBuilder();
         int count = 0;
         while (st.hasMoreTokens()) {
-            String s1;
             if (count > 0) {
-                sb.append('/').append(s1 = st.nextToken());
+                sb.append('/').append(st.nextToken());
 
             } else {
                 if (mapRoutes.containsKey(name)) {
