@@ -40,11 +40,16 @@ Protoptype/ example of  service publishing and request routing using zuul and ha
  - In order to test, start the application from the project https://github.com/SimonCanJer/spring-micro-hazel(both facade and DataService).
  It can be done automatically, when running installation script. Then start this application(it will be started automatically together with end point, when using
  one of installation scripts are mentioned above)
- -Run Postman (or another tool),
+ -Run Postman (or another similar tool),
   type http://localhost:8050/notes_service/get_notes?for=me and send as GET(8050 is zull's port)
   you will see a JSON response
   type http://localhost:8050/notes_service/put_note?for=wife&&what=love me and send as PUT
   You should see resposne.
+  
+  Remarks.
+  In this version we use the Mono<T> in the REST application facade, where request is routed to. It is in the micro.examples.facade.Controller class. The fact is that it is work inside Zuul framework. Yes, Ribbon part is hooked around, Mono<T> model works. Did not check, but Flux would also be working. Here a simple work around Ribbon is realized for the pruposes are exposed above. The alternative mechanism of discovery and LB is primitive but supports async REST with Mono....
+ 
+  
   
   
 
